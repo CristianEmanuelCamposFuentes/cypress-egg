@@ -30,7 +30,7 @@ context('Example 01', () => {
         cy.contains('Completed').click();
     })
 
-    it.only('Test #4: Assertions', () => {
+    it('Test #4: Assertions', () => {
         // Obtener el elemento para poder trabajarlo
         cy.get('.todo-list li').should('have.length', 2);
         cy.get('.new-todo').type("My long task #1{enter}");
@@ -38,6 +38,11 @@ context('Example 01', () => {
 
         cy.get('label:contains("My long task #1")')
             .parent().find('.toggle').click();
-        cy.contains('Completed').click();
+        cy.get('label:contains("My long task #1")')
+            .parent().parent().should('have.class', 'completed');
+
+        cy.get('label:contains("Walk the dog")')
+            .parent().find('.toggle').click();
     })
+
 })
