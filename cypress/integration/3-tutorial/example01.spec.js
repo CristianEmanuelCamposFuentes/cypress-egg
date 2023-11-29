@@ -29,4 +29,15 @@ context('Example 01', () => {
             .click();
         cy.contains('Completed').click();
     })
+
+    it.only('Test #4: Assertions', () => {
+        // Obtener el elemento para poder trabajarlo
+        cy.get('.todo-list li').should('have.length', 2);
+        cy.get('.new-todo').type("My long task #1{enter}");
+        cy.get('.todo-list li').should('have.length', 3);
+
+        cy.get('label:contains("My long task #1")')
+            .parent().find('.toggle').click();
+        cy.contains('Completed').click();
+    })
 })
