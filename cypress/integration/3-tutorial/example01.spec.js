@@ -42,7 +42,15 @@ context('Example 01', () => {
             .parent().parent().should('have.class', 'completed');
 
         cy.get('label:contains("Walk the dog")')
-            .parent().find('.toggle').click();
+            .parent().parent()
+            .should('have.not.class', 'completed');
+    })
+
+    it('Test #5: Reversing the Default Assertion', () => {
+        // Obtener el elemento para poder trabajarlo
+        cy.get('button.close').should('not.exist');
+        // cy.get('button.close');
+
     })
 
 })
