@@ -1,6 +1,6 @@
 context('Wikipedia Test', () => {
     // Load test data from a fixture file
-    beforeEach(() => {
+    beforeEach(function(){
         cy.fixture('wikipedia').as('wiki');
     });
 
