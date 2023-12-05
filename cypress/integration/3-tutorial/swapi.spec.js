@@ -23,8 +23,6 @@ context('API Testing', () => {
                 expect(response.status).to.eq(200);
                 expect(response.body).to.have.property('hair_color');
 
-                // Otras verificaciones para el primer personaje
-
                 // Prueba para cada planeta asociado al primer film
                 response.body.films.forEach(film => {
                     cy.request({
@@ -33,7 +31,6 @@ context('API Testing', () => {
                     }).then(filmResponse => {
                         expect(filmResponse.status).to.eq(200);
                         expect(filmResponse.body).to.have.property('title');
-                        // Otras verificaciones para cada film
                     });
                 });
             });
@@ -67,10 +64,18 @@ context('API Testing - Star Wars API', () => {
                 // Validate release date format
                 expect(movieResponse.body.release_date).to.match(/^\d{4}-\d{2}-\d{2}$/);
                 // Validate response includes characters, planets, starships, vehicles, and species
-                expect(movieResponse.body).to.have.all.keys('characters', 'planets', 'starships', 'vehicles', 'species');
+                expect(movieResponse.body).to.include.keys('characters', 'planets', 'starships', 'vehicles', 'species');
+
+                // Validate response includes all of the keys
+                expect(movieResponse.body).to.have.all.keys('characters', 'planets', 'starships', 'vehicles', 'species', 'created', 'director', 'edited', 'episode_id', 'opening_crawl', 'producer', 'release_date', 'title', 'url');
+
                 // Validate each element includes more than 1 element
                 Object.values(movieResponse.body).forEach(element => {
-                    expect(element).to.be.an('array').and.to.have.lengthOf.at.least(2);
+
+                    if (Array.isArray(element)) {
+                        expect(element).to.have.lengthOf.at.least(2);
+                    }
+                    // expect(element).to.be.an('array').and.to.have.lengthOf.at.least(2);
                 });
             });
         });
@@ -110,7 +115,8 @@ context('API Testing - Star Wars API', () => {
     it('Test 04 - Validate /films/7/ Endpoint (404)', () => {
         cy.request({
             method: 'GET',
-            url: 'https://swapi.dev/api/films/7/'
+            url: 'https://swapi.dev/api/films/7/',
+            failOnStatusCode: false
         }).then((response) => {
             expect(response.status).to.eq(404);
         });
