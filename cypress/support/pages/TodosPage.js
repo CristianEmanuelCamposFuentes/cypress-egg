@@ -17,13 +17,13 @@ class TodosPage {
     todoToggle(id) { return cy.get(':nth-child(' + id + ') > .view > .toggle'); }
     todoCount() { return cy.get(pageLocators.todoCount).invoke('text').then(parseInt); }
 
-    // This method adds a new todo item to the page by typing the todo and pressing 'Enter'.
+    // This method adds a new to do item to the page by typing the to do and pressing 'Enter'.
     addTodo(todo) { return this.newTodoInput().type(todo + '{enter}'); }
 
-    // This method clicks the toggle button of a todo item with a specific ID.
+    // This method clicks the toggle button of a to do item with a specific ID.
     clickTodoToggle(id) { return this.todoToggle(id).click(); }
 
-    // This method clicks the "Completed" link to filter completed todo items.
+    // This method clicks the "Completed" link to filter completed to do items.
     clickCompletedLink() { return this.completedLink().click(); }
 }
 
