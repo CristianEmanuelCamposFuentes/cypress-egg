@@ -1,0 +1,9 @@
+{
+  "data": {
+    "validUsername": "validUser",
+    "validPassword": "pwd",
+    "invalidUsername": " ",
+    "invalidPassword": "Esta Contraseña va a dar mal"
+  },
+  "baseUrl": "https://qavalidation.com/demo-form/"
+}
