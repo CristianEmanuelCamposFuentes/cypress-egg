@@ -23,6 +23,5 @@ context('API Testing', () => {
                 expect(response.body).to.have.property('hair_color')
             })
         })
-
     });
 })
